@@ -26744,12 +26744,9 @@ var _hoisted_11 = {
     "max-width": "75%"
   }
 };
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_12 = {
   "class": "block mt-1 text-xs text-gray-500"
-}, "21/10/2020 17:44", -1
-/* HOISTED */
-);
+};
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200"
@@ -26792,10 +26789,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" box message "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" message "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.messages, function (message) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: message.id,
-          "class": "w-full mb-3 text-right"
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([message.from == _ctx.$page.auth.user.id ? 'text-right' : '', "w-full mb-3 text-right"])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(message.content), 1
         /* TEXT */
-        ), _hoisted_12]);
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(message.created_at), 1
+        /* TEXT */
+        )], 2
+        /* CLASS */
+        );
       }), 128
       /* KEYED_FRAGMENT */
       )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                            <div class=\"w-full mb-3\">\n                                <p class=\"inline-block p-2 rounded-md messageToMe\" style=\"max-width: 75%;\">\n                                    Oi!\n                                </p>\n                                <span class=\"block mt-1 text-xs text-gray-500\">21/10/2020 17:44</span>\n                            </div>\n                            ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" form "), _hoisted_13])])])])];

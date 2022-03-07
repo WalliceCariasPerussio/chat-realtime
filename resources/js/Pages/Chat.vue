@@ -30,11 +30,13 @@
 
                         <!-- message -->
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
-                            <div v-for="message in messages" :key="message.id" class="w-full mb-3 text-right">
+                            <div v-for="message in messages" :key="message.id"
+                                :class="(message.from == $page.auth.user.id) ? 'text-right' : ''"
+                                class="w-full mb-3 text-right">
                                 <p class="inline-block p-2 rounded-md messageFromMe" style="max-width: 75%;">
                                     {{message.content}}
                                 </p>
-                                <span class="block mt-1 text-xs text-gray-500">21/10/2020 17:44</span>
+                                <span class="block mt-1 text-xs text-gray-500">{{message.created_at}}</span>
                             </div>
 
                             <!--
