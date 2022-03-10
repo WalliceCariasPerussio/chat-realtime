@@ -16,4 +16,11 @@ class UserController extends Controller
             'users' => User::where('id','<>',Auth::user()->id)->get()
         ],Response::HTTP_OK);
     }
+
+    public function show(User $userId)
+    {
+        return response()->json([
+            'user' => $userId
+        ],Response::HTTP_OK);
+    }
 }
