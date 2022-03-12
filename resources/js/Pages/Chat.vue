@@ -7,11 +7,11 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg flex" style="min-height: 400px; max-height: 400px;">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" >
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg flex " style="min-height: 400px; max-height: 400px;">
 
                     <!-- list users -->
-                    <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
+                    <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll  scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300">
                         <ul>
                             <li
                                 v-for="user in users" :key="user.id"
@@ -20,17 +20,17 @@
                                 class="p-6 text-lg text-gray-600 leading-7  font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">
                                     {{user.name}}
-                                    <span class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
+                                    <span v-if='user.notification' class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></span>
                                 </p>
                             </li>
                         </ul>
                     </div>
 
                     <!-- box message -->
-                    <div class="w-9/12 flex flex-col justify-between">
+                    <div class="w-9/12 flex flex-col justify-between ">
 
                         <!-- message -->
-                        <div class="w-full p-6 flex flex-col overflow-y-scroll">
+                        <div class="w-full p-6 flex flex-col overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300">
                             <div v-for="message in messages" :key="message.id"
                                 :class="(message.from == $page.props.user.id) ? 'text-right' : ''"
                                 class="w-full mb-3  message">
@@ -61,9 +61,11 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import AppLayout from '@/Layouts/AppLayout.vue'
+    import { defineComponent } from 'vue';
+    import AppLayout from '@/Layouts/AppLayout.vue';
     import moment from 'moment';
+    import store from '../store';
+
 
     moment.locale('pt-br');
 
@@ -83,6 +85,27 @@
             axios.get('api/users').then(r => {
                 this.users =  r.data.users;
             });
+
+            Echo.private(`user.${this.user.id}`).listen('.SendMessage', async (e) => {
+                if(this.userActive && this.userActive.id === e.message.from){
+                    await this.messages.push(e.message);
+                    this.scrollToBottom();
+                }else{
+
+                    this.users.filter((user) => {
+                         if(user.id === e.message.from) {
+                            this.users[this.users.indexOf(user)]['notification'] = true;
+                         }
+                    });
+
+                }
+
+            });
+        },
+        computed:{
+            user() {
+                return store.state.user;
+            }
         },
         methods: {
             scrollToBottom: function(){
@@ -99,6 +122,13 @@
                     this.messages =  r.data.messages;
                 });
 
+                this.users.filter((user) => {
+                        if(user.id === userId) {
+                            this.users[this.users.indexOf(user)]['notification'] = false;
+                        }
+                });
+
+
                 this.scrollToBottom();
             },
             sendMessage: async function(userId){
@@ -107,7 +137,7 @@
                     'content': this.message
                 }).then(r => {
                     this.messages.push({
-                        'from': '1',
+                        'from': this.user.id,
                         'to': this.userActive.id,
                         'content': this.message,
                         'created_at': new Date().toISOString(),

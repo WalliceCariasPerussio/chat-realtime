@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::get('/users',[UserController::class,'index'])->name('users.index');
+    Route::get('/user/me',[UserController::class,'me'])->name('users.me');
     Route::get('/users/{userId}',[UserController::class,'show'])->name('users.show');
     Route::get('/messages/{userId}',[MessageController::class,'listMessages'])->name('messages.listMessages');
     Route::post('/messages/store',[MessageController::class,'store'])->name('messages.store');
