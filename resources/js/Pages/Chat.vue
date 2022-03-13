@@ -66,6 +66,7 @@
     import moment from 'moment';
     import store from '../store';
 
+    store.dispatch('userStateAction');
 
     moment.locale('pt-br');
 
