@@ -5,12 +5,12 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
 async function csrf_token() {
+    const date = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     await axios.get(route('csrf-token')).then(response => {
         document.querySelector('meta[name="csrf-token"]').setAttribute('content', response.data.csrfToken);
-        console.log(response.data.csrfToken);
     });
 
-    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    return date;
 }
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
