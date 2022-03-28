@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        if(config('app.env') === 'production') {
+            Gate::before(function ($user, $ability) {
+                if($user->isAdmin()) {
+                    return true;
+                }
+            });
+        }
         //
     }
 }

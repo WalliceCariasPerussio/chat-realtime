@@ -22524,7 +22524,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     logout: function logout() {
-      this.$inertia.post(route('logout'));
+      this.$inertia.post(route('logout'), {
+        _token: this.csrf_token()
+      });
     }
   }
 }));

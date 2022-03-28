@@ -279,7 +279,10 @@
             },
 
             logout() {
-                this.$inertia.post(route('logout'));
+                this.$inertia.post(route('logout'), {
+                    _token: this.csrf_token()
+
+                });
             },
         }
     })
