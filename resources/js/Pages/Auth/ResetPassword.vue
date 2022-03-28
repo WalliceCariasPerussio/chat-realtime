@@ -65,6 +65,7 @@
                     token: this.token,
                     email: this.email,
                     password: '',
+                    _token: this.csrf_token(),
                     password_confirmation: '',
                 })
             }

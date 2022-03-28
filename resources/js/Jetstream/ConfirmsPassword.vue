@@ -94,6 +94,7 @@
 
                 axios.post(route('password.confirm'), {
                     password: this.form.password,
+                    _token: this.csrf_token(),
                 }).then(() => {
                     this.form.processing = false;
                     this.closeModal()

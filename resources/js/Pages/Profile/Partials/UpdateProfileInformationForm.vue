@@ -97,6 +97,7 @@
                     _method: 'PUT',
                     name: this.user.name,
                     email: this.user.email,
+                    _token: this.csrf_token(),
                     photo: null,
                 }),
 

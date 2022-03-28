@@ -74,6 +74,7 @@
                 recovery: false,
                 form: this.$inertia.form({
                     code: '',
+                    _token: this.csrf_token(),
                     recovery_code: '',
                 })
             }

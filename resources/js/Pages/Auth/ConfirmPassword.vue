@@ -52,13 +52,14 @@
             return {
                 form: this.$inertia.form({
                     password: '',
+                    _token: this.csrf_token(),
                 })
             }
         },
 
         methods: {
             submit() {
-                this.form.post(this.route('password.confirm'), {
+                this.form.post(this.route('password.confirm',{_token: this.csrf_token(),}), {
                     onFinish: () => this.form.reset(),
                 })
             }

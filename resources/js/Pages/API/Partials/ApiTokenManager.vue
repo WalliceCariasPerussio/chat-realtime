@@ -206,14 +206,18 @@
             return {
                 createApiTokenForm: this.$inertia.form({
                     name: '',
+                    _token: this.csrf_token(),
                     permissions: this.defaultPermissions,
                 }),
 
                 updateApiTokenForm: this.$inertia.form({
+                    _token: this.csrf_token(),
                     permissions: []
                 }),
 
-                deleteApiTokenForm: this.$inertia.form(),
+                deleteApiTokenForm: this.$inertia.form({
+                    _token: this.csrf_token(),
+                }),
 
                 displayingToken: false,
                 managingPermissionsFor: null,
@@ -223,17 +227,17 @@
 
         methods: {
             createApiToken() {
-                this.createApiTokenForm.post(route('api-tokens.store'), {
+                this.createApiTokenForm.post(route('api-tokens.store',{_token: this.csrf_token()}), {
                     preserveScroll: true,
                     onSuccess: () => {
                         this.displayingToken = true
-                        this.createApiTokenForm.reset()
+                        this.createApiTokenreset()
                     }
                 })
             },
 
             manageApiTokenPermissions(token) {
-                this.updateApiTokenForm.permissions = token.abilities
+                this.updateApiTokenpermissions = token.abilities
 
                 this.managingPermissionsFor = token
             },

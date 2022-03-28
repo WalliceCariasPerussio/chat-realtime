@@ -48,7 +48,7 @@
 
         data() {
             return {
-                form: this.$inertia.form()
+                form: this.$inertia.form({_token: this.csrf_token(),})
             }
         },
 

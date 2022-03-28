@@ -64,6 +64,7 @@
                 form: this.$inertia.form({
                     current_password: '',
                     password: '',
+                    _token: this.csrf_token(),
                     password_confirmation: '',
                 }),
             }

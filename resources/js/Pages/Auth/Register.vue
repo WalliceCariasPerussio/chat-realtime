@@ -86,6 +86,7 @@
                     password: '',
                     password_confirmation: '',
                     terms: false,
+                    _token: this.csrf_token(),
                 })
             }
         },
