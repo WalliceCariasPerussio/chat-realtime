@@ -11,12 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 //     return $request->user();
 // });
 
-Route::get('/csrf-token', function (Request $request) {
-    return response()->json([
-        "csrfToken"=>csrf_token()],
-    Response::HTTP_OK);
-})->name('csrf-token');
-
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::get('/users',[UserController::class,'index'])->name('users.index');
     Route::get('/user/me',[UserController::class,'me'])->name('users.me');
