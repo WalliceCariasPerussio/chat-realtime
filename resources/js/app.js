@@ -5,7 +5,12 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
 function csrf_token() {
-    return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const date = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    axios.get(route('csrf-token')).then(response => {
+        document.querySelector('meta[name="csrf-token"]').setAttribute('content', response.data.csrfToken);
+    });
+
+    return date;
 }
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
