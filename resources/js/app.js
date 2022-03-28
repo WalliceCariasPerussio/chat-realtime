@@ -4,7 +4,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
-async function csrf_token() {
+function csrf_token() {
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 }
 
