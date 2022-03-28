@@ -28610,6 +28610,7 @@ function _csrf_token() {
             _context.next = 2;
             return axios.get(route('csrf-token')).then(function (response) {
               document.querySelector('meta[name="csrf-token"]').setAttribute('content', response.data.csrfToken);
+              console.log(response.data.csrfToken);
             });
 
           case 2:

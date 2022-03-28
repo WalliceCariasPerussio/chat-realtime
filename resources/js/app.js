@@ -7,7 +7,9 @@ import { InertiaProgress } from '@inertiajs/progress';
 async function csrf_token() {
     await axios.get(route('csrf-token')).then(response => {
         document.querySelector('meta[name="csrf-token"]').setAttribute('content', response.data.csrfToken);
+        console.log(response.data.csrfToken);
     });
+
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 }
 
