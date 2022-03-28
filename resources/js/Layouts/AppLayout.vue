@@ -267,6 +267,7 @@
             return {
                 showingNavigationDropdown: false,
             }
+
         },
 
         methods: {
@@ -279,7 +280,9 @@
             },
 
             logout() {
-                this.$inertia.post(route('logout'),{_token: this.csrf_token()});
+                this.$inertia.form({
+                    _token: this.csrf_token()
+                }).post(route('logout'));
             },
         }
     })
